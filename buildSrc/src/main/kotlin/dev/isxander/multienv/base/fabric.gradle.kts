@@ -1,6 +1,6 @@
 package dev.isxander.multienv.base
 
-import dev.isxander.multienv.Loader
+import dev.isxander.multienv.*
 
 /**
  * This plugin should be applied when using the Fabric Loader.
@@ -12,7 +12,7 @@ plugins {
     id("fabric-loom")
 }
 
-project.extensions.extraProperties["appliedLoader"] = Loader.Fabric.serialName
+project.loader = Loader.Fabric
 
 val fabricExt = extensions.create<FabricExtension>("fabric")
 

@@ -1,3 +1,4 @@
+import dev.isxander.multienv.*
 import dev.isxander.multienv.base.*
 
 multiEnv {

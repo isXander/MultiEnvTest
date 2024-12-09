@@ -17,9 +17,12 @@ enum class Loader(val serialName: String) {
 }
 
 val Project.loaderOrNull: Loader?
-    get() = (project.extensions.extraProperties["loader"] as String?)?.let { Loader.fromSerialName(it) }
-val Project.loader: Loader
+    get() = (project.extensions.extraProperties["appliedLoader"] as String?)?.let { Loader.fromSerialName(it) }
+var Project.loader: Loader
     get() = loaderOrNull ?: throw IllegalStateException("Loader not set")
+    internal set(value) {
+        project.extensions.extraProperties["appliedLoader"] = value.serialName
+    }
 
 
 val Project.isFabric: Boolean

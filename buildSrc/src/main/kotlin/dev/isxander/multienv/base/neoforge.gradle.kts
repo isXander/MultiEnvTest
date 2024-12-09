@@ -1,6 +1,6 @@
 package dev.isxander.multienv.base
 
-import dev.isxander.multienv.Loader
+import dev.isxander.multienv.*
 
 /**
  * This plugin should be applied when using the NeoForge Loader.
@@ -12,7 +12,7 @@ plugins {
     id("net.neoforged.moddev")
 }
 
-project.extensions.extraProperties["appliedLoader"] = Loader.NeoForge.serialName
+project.loader = Loader.NeoForge
 
 val neoExt = extensions.create<NeoForgeExtension>("neoforge")
 

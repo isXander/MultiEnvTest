@@ -6,11 +6,7 @@ childProjects.forEach { _, childProject ->
     }
 }
 
-//subprojects {
-//    applyMultienv()
-//}
-
-fun Project.applyMultienv() {
+private fun Project.applyMultienv() {
     val desiredLoader = project.findProperty("multienv.loader")?.toString()
 
     when {

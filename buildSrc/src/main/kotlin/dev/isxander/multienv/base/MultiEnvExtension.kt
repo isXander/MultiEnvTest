@@ -1,4 +1,4 @@
-package dev.isxander.multienv
+package dev.isxander.multienv.base
 
 /**
  * The "common" extension for all loaders, as much configuration is done in this extension
@@ -11,7 +11,7 @@ import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import javax.inject.Inject
 
-open class MinecraftExtension @Inject constructor(objects: ObjectFactory) {
+open class MultiEnvExtension @Inject constructor(objects: ObjectFactory) {
     val minecraftVersion: Property<String> = objects.property(String::class.java)
     val javaTarget: Property<Int> = objects.property(Int::class.java)
 
@@ -26,7 +26,7 @@ open class MinecraftExtension @Inject constructor(objects: ObjectFactory) {
     val localRuntime: Configuration get() = _localRuntime.get()
 }
 
-operator fun MinecraftExtension.invoke(block: MinecraftExtension.() -> Unit) = block()
-val Project.minecraft: MinecraftExtension
-    get() = extensions.getByType(MinecraftExtension::class.java)
+operator fun MultiEnvExtension.invoke(block: MultiEnvExtension.() -> Unit) = block()
+val Project.multiEnv: MultiEnvExtension
+    get() = extensions.getByType(MultiEnvExtension::class.java)
 

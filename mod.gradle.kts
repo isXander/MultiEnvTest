@@ -1,7 +1,8 @@
-import dev.isxander.multienv.*
+import dev.isxander.multienv.base.*
 
-minecraft {
-    minecraftVersion = "1.21.4"
+multiEnv {
+    minecraftVersion = project.property("multienv.minecraft") as String
+    javaTarget = 21
 }
 
 // Fabric block is only evaluated if the fabric plugin is applied
@@ -23,7 +24,7 @@ fabric {
 
 // NeoForge block is only evaluated if the neoforge plugin is applied
 neoforge {
-    neoForgeVersion = "21.4.0-beta"
+    neoForgeVersion = project.property("multienv.neoforge") as String
 
     repositories {
         maven("https://thedarkcolour.github.io/KotlinForForge/")
@@ -43,7 +44,7 @@ neoforge {
 
 dependencies {
     fabric { // using the same extension blocks as a way to only add dependencies under specific platforms
-        minecraft.implementation("net.fabricmc.fabric-api:fabric-api:0.110.5+1.21.4")
+        multiEnv.implementation("net.fabricmc.fabric-api:fabric-api:0.110.5+1.21.4")
     }
 
     neoforge {

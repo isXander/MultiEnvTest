@@ -1,9 +1,28 @@
 import dev.isxander.multienv.*
 import dev.isxander.multienv.base.*
 
+group = "dev.isxander"
+
 multiEnv {
     minecraftVersion = project.property("multienv.minecraft") as String
     javaTarget = 21
+
+//    parchment {
+//        mappingsVersion = "2024.12.07"
+//        minecraftVersion = "1.21.4"
+//    }
+
+    manifest {
+        modName = "MultiEnv Testing Mod"
+        modVersion = "1.0.0+${loader.friendlyName}"
+        modId = "multienv-test"
+        modDescription = "A test mod for MultiEnv"
+        modLicense = "ARR"
+    }
+}
+
+afterEvaluate {
+    println("Hello, world!")
 }
 
 // Fabric block is only evaluated if the fabric plugin is applied
@@ -31,13 +50,13 @@ neoforge {
         maven("https://thedarkcolour.github.io/KotlinForForge/")
     }
 
+    // creates two run configurations: `client` and `server`
+    defaultRuns { "NeoForge $it" }
+
     // You can configure ModDevGradle as usual from here
     configureNeoforge {
-        runs {
-            create("client") {
-                client()
-                ideName = "NeoForge Client"
-            }
+        parchment {
+            // ...
         }
     }
 }
@@ -54,4 +73,3 @@ dependencies {
         /*minecraft.implementation("thedarkcolour:kotlinforforge-neoforge:4.10.0")*/
     }
 }
-

@@ -1,17 +1,14 @@
 package dev.isxander.multienv
 
-import net.fabricmc.loom.api.LoomGradleExtensionAPI
-import net.neoforged.moddevgradle.dsl.NeoForgeExtension
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.configure
 
-enum class Loader(val serialName: String) {
+enum class Loader(val friendlyName: String) {
     Fabric("fabric"),
     NeoForge("neoforge");
 
     companion object {
         fun fromSerialName(name: String): Loader? {
-            return values().firstOrNull { it.serialName == name }
+            return values().firstOrNull { it.friendlyName == name }
         }
     }
 }
@@ -21,7 +18,7 @@ val Project.loaderOrNull: Loader?
 var Project.loader: Loader
     get() = loaderOrNull ?: throw IllegalStateException("Loader not set")
     internal set(value) {
-        project.extensions.extraProperties["appliedLoader"] = value.serialName
+        project.extensions.extraProperties["appliedLoader"] = value.friendlyName
     }
 
 
@@ -29,3 +26,8 @@ val Project.isFabric: Boolean
     get() = loader == Loader.Fabric
 val Project.isNeoForge: Boolean
     get() = loader == Loader.NeoForge
+
+const val FABRIC_MANIFEST = "fabric.mod.json"
+const val NEOFORGE_MANIFEST = "META-INF/neoforge.mods.toml"
+const val OLD_NEOFORGE_MANIFEST = "META-INF/mods.toml"
+val modManifests = listOf(FABRIC_MANIFEST, NEOFORGE_MANIFEST, OLD_NEOFORGE_MANIFEST)
